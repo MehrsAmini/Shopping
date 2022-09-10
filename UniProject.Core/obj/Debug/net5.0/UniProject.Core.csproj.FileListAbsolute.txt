@@ -1,0 +1,29 @@
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.Core.deps.json
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.Core.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\bin\Debug\net5.0\ref\UniProject.Core.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.Core.pdb
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.csproj.AssemblyReference.cache
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.AssemblyInfoInputs.cache
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.AssemblyInfo.cs
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.csproj.CoreCompileInputs.cache
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\ref\UniProject.Core.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.pdb
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.DataLayer.pdb
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.Core.deps.json
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.Core.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\bin\Debug\net5.0\ref\UniProject.Core.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.Core.pdb
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\bin\Debug\net5.0\UniProject.DataLayer.pdb
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.csproj.AssemblyReference.cache
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.AssemblyInfoInputs.cache
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.AssemblyInfo.cs
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.csproj.CoreCompileInputs.cache
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\obj\Debug\net5.0\ref\UniProject.Core.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.pdb
+E:\mehrsa\Project-Store\UniProject\UniProject.Core\obj\Debug\net5.0\UniProject.Core.csproj.CopyComplete
