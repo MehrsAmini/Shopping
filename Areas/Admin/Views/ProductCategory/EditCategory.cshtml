@@ -1,0 +1,110 @@
+﻿@model UniProject.Core.DTOs.Admin.ProductCategory.CategoryInfoViewModel
+@{
+    ViewData["Title"] = "EditCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title-wrap bar-success">
+            <h4 class="card-title" id="horz-layout-colored-controls">ویرایش دسته بندی محصولات</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="px-3">
+            <form class="form form-horizontal" asp-action="EditCategory" method="post">
+                <input type="hidden" asp-for="CategoryIDLevel3" />
+                <div class="form-body">
+                    <h4 class="form-section">
+                        <i class="icon-direction"></i> دسته بندی محصول
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput1">عنوان :</label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="CategoryTitleLevel3" id="userinput1" class="form-control round">
+                                    <span asp-validation-for="CategoryTitleLevel3" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput2">URL:</label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="CategoryURL" class="form-control round">
+                                    <span asp-validation-for="CategoryURL" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="form-section">
+                        <i class="ft-mail"></i>پدر دسته بندی محصول
+                    </h4>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <fieldset class="form-group">
+                                <label>اصلی</label>
+                                <select class="form-control" id="Parent1" name="CategoryIDLevel1" asp-items="@(ViewData["Category"] as SelectList)">
+                                    <option disabled selected value="">انتخاب کنید</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <fieldset class="form-group">
+                                <label>فرعی</label>
+                                <select class="form-control" id="Parent2" name="CategoryIDLevel1" asp-items="@(ViewData["SubCategory"] as SelectList)">
+                                    <option disabled selected value="">انتخاب کنید</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions right">
+                    <a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-check"></i> ذخیره
+                        </button>
+                    </a>
+                    <a href="/Admin/ProductCategory" class="btn btn-danger mr-1">
+                        <i class="ft-x"></i> لغو
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        $("#Parent1").change(function () {
+            $("#Parent2").empty();
+            $.getJSON("/admin/products/GetCategoryLevel2/" + $("#Parent1 :selected").val(),
+                function (data) {
+                    $("#Parent1").attr('name', 'CategoryIDLevel1');
+                    $("#Parent2").attr('name', 'x');
+                    $.each(data,
+                        function () {
+                            $("#Parent2").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                });
+        });
+        $("#Parent2").change(function () {
+            if ($("#Parent2").val()) {
+                $("#Parent1").attr('name', 'x');
+                $("#Parent2").attr('name', 'CategoryIDLevel1');
+            }
+            else {
+                $("#Parent1").attr('name', 'CategoryIDLevel1');
+                $("#Parent2").attr('name', 'x');
+            }
+        });
+    </script>
+}

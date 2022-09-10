@@ -1,0 +1,156 @@
+﻿@model UniProject.Core.DTOs.Admin.Product.ShowProductsViewModel
+@{
+    ViewData["Title"] = "ShowProducts";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<section id="configuration">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title">لیست محصولات</h4>
+                <div class="card-body collapse show">
+                    <div class="card-block card-dashboard">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <a href="/admin/createProduct" class="btn mr-1 btn-primary">افزودن محصول جدید</a>
+                            </div>
+                        </div>
+                        <form asp-action="ShowProducts">
+                            @*<div class="row">
+                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                    <fieldset class="form-group">
+                                        <label>سطح اول</label>
+                                        <select class="form-control" id="CategoryLevel1" asp-items="@(ViewData["CategoryLevel1"] as SelectList)"></select>
+                                    </fieldset>
+                                </div>
+                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                    <fieldset class="form-group">
+                                        <label>سطح دوم</label>
+                                        <select class="form-control" id="CategoryLevel2" asp-items="@(ViewData["CategoryLevel2"] as SelectList)"></select>
+                                    </fieldset>
+                                </div>
+                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                    <fieldset class="form-group">
+                                        <label>سطح سوم</label>
+                                        <select class="form-control" id="CategoryId" name="CategoryId" asp-items="@(ViewData["CategoryLevel3"] as SelectList)"></select>
+                                    </fieldset>
+                                </div>
+                            </div>*@
+
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5 col-xl-4 col-lg-6">
+                                    <div class="position-relative has-icon-left">
+                                        <input type="text" class="form-control" name="productName" placeholder="نام محصول">
+                                        <div class="form-control-position">
+                                            <i class="ft-search info"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="col-sm-12 col-md-5 col-xl-4 col-lg-6">
+                                    <div class="position-relative">-->
+                                        @*<label>نام فروشنده</label>*@
+                                        <!--<select class="form-control" name="SellerId" asp-items="@(ViewData["Seller"] as SelectList)"></select>
+                                    </div>
+                                </div>-->
+                                <div class="col-sm-12 col-md-2">
+                                    <button class="btn btn-info" type="submit">جستجو</button>
+                                    <a href="/Admin/ShowProducts"><i class="info fa fa-refresh"></i></a>
+                                </div>
+                            </div>
+                        </form>
+                        <table class="table table-responsive-md text-center table-striped table-bordered zero-configuration dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <thead>
+                                <tr role="row">
+                                    <th>نام محصول</th>
+                                    <th>دسته بندی</th>
+                                    <th>نام فروشنده</th>
+                                    <th>برند</th>
+                                    <th>قیمت</th>
+                                    <th>موجودی</th>
+                                    <th>وضعیت</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Products)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td>@item.ProductName</td>
+                                        <td>@item.ProductCategory.CategoryTitle</td>
+                                        <td>@item.User.UserName</td>
+                                        <td>@item.Brand</td>
+                                        <td>@item.Price.ToString("#,0 تومان")</td>
+                                        <td>@item.Inventory</td>
+                                        <td>
+                                            @if (item.IsActive)
+                                            {
+                                                <i class="success p-0 fa fa-check font-medium-3 mr-2"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="danger p-0 fa fa-times font-medium-3 mr-2"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="/admin/editProduct/@item.ProductId" class="success p-0" data-original-title="" title="">
+                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                            </a>
+                                            <a href="/Admin/DeleteProduct/@item.ProductId" class="danger p-0" data-original-title="" title="">
+                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-12">
+                                <ul class="pagination justify-content-start">
+                                    @for (int i = 1; i <= Model.PageCount; i++)
+                                    {
+                                        <li class="page-item @((i == Model.CurrentPage) ? "active" : "")">
+                                            <a class="page-link" href="/Admin/ShowProducts?PageId=@i">@i</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                @*Empty*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*@section Scripts
+{
+    <script>
+        //for Category
+        $("#CategoryLevel1").change(function () {
+            $("#CategoryLevel2").empty();
+            $("#CategoryId").empty();
+            $.getJSON("/admin/products/GetCategoryLevel2/" + $("#CategoryLevel1 :selected").val(),
+                function (data) {
+                    $.each(data,
+                        function () {
+                            $("#CategoryLevel2").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                });
+        });
+        $("#CategoryLevel2").change(function () {
+            $("#CategoryId").empty();
+            $.getJSON("/admin/products/GetCategoryLevel3/" + $("#CategoryLevel2 :selected").val(),
+                function (data) {
+                    $.each(data,
+                        function () {
+                            $("#CategoryId").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                });
+        });
+    </script>
+}*@
+

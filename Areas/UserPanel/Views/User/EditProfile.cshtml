@@ -1,0 +1,65 @@
+﻿@model UniProject.Core.DTOs.UserPanel.EditUserProfileViewModel
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-main">
+    <div class="d-block">
+        <section class="profile-home">
+            <div class="col-lg">
+                <div class="post-item-profile order-1 d-block">
+                    <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                        <div class="sidebar-profile sidebar-navigation">
+                            <partial name="_SideBar" />
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                        <div class="profile-content">
+                            <div class="profile-stats">
+                                <div class="profile-address">
+                                    <div class="middle-container">
+                                        <form asp-action="EditProfile" method="post" class="form-checkout">
+                                            <div class="form-checkout-row">
+                                                <table class="table table-profile">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="w-50">
+                                                                <div>
+                                                                    <label for="disabledInput">نام کاربری</label>
+                                                                    <input asp-for="UserName" type="text" id="namefirst" readonly="readonly" class="input-namefirst-checkout form-control">
+                                                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <label for="email">ایمیل <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                                                    <input asp-for="Email" type="text" id="email" class="input-email-checkout form-control">
+                                                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="AR-CR">
+                                                    <button class="btn-registrar"> ثبت تغییرات </button>
+                                                    <a href="/UserPanel" class="cancel-edit-address" data-dismiss="modal" aria-label="Close">بازگشت</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

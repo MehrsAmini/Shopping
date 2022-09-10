@@ -1,0 +1,96 @@
+﻿@model UniProject.Core.DTOs.Admin.CreateUserViewModel
+@using UniProject.DataLayer.Entity
+@{
+    ViewData["Title"] = "CreateUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<Role> Roles = ViewData["Roles"] as List<Role>;
+}
+
+<div class="col-md-6">
+    <div class="card" style="height: 788.8px;">
+        <div class="card-header">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title" id="hidden-label-basic-form">افزودن کاربر جدید</h4>
+            </div>
+            <p class="mb-0"></p><p class="textalign">
+                برای افزودن کاربر جدید کافیست اطلاعات زیر را پر کنید
+            </p>
+            <p></p>
+        </div>
+        <div class="card-body">
+            <div class="px-3">
+                <form id="userForm" class="form" asp-action="CreateUser" onsubmit="onFormSubmit(); return false;" method="post">
+                    <div class="form-body">
+                        <h4 class="form-section">
+                            <i class="icon-user"></i> اطلاعات شخصی
+                        </h4>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" asp-for="UserName" class="form-control round" placeholder="نام کاربری">
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                    <div class="form-control-position">
+                                        <i class="ft-user info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="email" asp-for="Email" class="form-control round" placeholder="ایمیل">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                    <div class="form-control-position">
+                                        <i class="ft-mail danger"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" asp-for="Password" class="form-control round" placeholder="رمز عبور">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                    <div class="form-control-position">
+                                        <i class="ft-lock warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="form-section">
+                                <i class="icon-user"></i> نقش کاربر
+                            </h4>
+                            <div class="form-group">
+                                @foreach (var role in Roles)
+                                {
+                                    <div class="m-0">
+                                        <input type="checkbox" name="SelectedRoles" value="@role.RoleId">
+                                        <label style="color:black">@role.RoleTitle</label>
+                                    </div>
+                                }
+                                <span id="roles" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <a href="/Admin/Users" class="btn mr-1 btn-danger">
+                            <i class="ft-x"></i> لغو
+                        </a>
+                        <a href="/Admin/Users" class="btn mr-1">
+                            <button type="submit" class="btn btn-success">
+                                <i class="icon-check"></i> ذخیره
+                            </button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function onFormSubmit() {
+        var anyRole = $('input[name="SelectedRoles"]').toArray().some(function (x) { return x.checked; });
+        if (anyRole) {
+            $('#userForm').submit();
+            return true;
+        }
+        document.getElementById("roles").innerHTML = 'لطفا یک نقش برای کاربر انتخاب کنید';
+        return false;
+    };
+</script>

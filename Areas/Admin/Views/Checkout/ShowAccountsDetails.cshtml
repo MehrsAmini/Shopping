@@ -1,0 +1,101 @@
+﻿@using UniProject.Core.DTOs
+@using UniProject.Core.Convertor
+@model Tuple<List<ProductsOfASellerViewModel>, int, string>
+@{
+    ViewData["Title"] = "ShowAccountsDetails";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    int sum = Model.Item1.Sum(m => m.Sum);
+}
+
+<section id="configuration">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title">نام فروشنده:
+                    <span> @Model.Item3</span>
+                </h4>
+                <div class="card-body collapse show">
+                    <div class="card-block card-dashboard">
+                        @*<div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <a href="admin/CheckoutWithSellers" class="btn mr-1 btn-primary">افزودن محصول جدید</a>
+                                </div>
+                            </div>*@
+                        @*<form asp-action="ShowAccounts" id="formFilter">
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5 col-xl-4 col-lg-6">
+                                        <div class="position-relative has-icon-left">
+                                            <input type="text" class="form-control" name="filter" placeholder="نام فروشنده">
+                                            <div class="form-control-position">
+                                                <i class="ft-search info"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <button class="btn btn-info" type="submit">جستجو</button>
+                                        <a href="/Admin/ShowProducts"><i class="info fa fa-refresh"></i></a>
+                                    </div>
+                                </div>
+                            </form>*@
+                        <table class="table table-responsive-md text-center table-striped table-bordered zero-configuration dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <thead>
+                                <tr role="row">
+                                    <th>تصویر کالا</th>
+                                    <th>نام کالا</th>
+                                    <th>قیمت کالای فروش رفته</th>
+                                    <th>تعداد کالای فروش رفته</th>
+                                    <th>جمع</th>
+                                    <th>شماره فاکتور خریدار</th>
+                                    <th>تاریخ ثبت سفارش</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Item1)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <img src="~/@item.ImageName" class="img-thumbnail" style="width:100px; height:100px;" />
+                                        </td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.Price.ToString("#,0")</td>
+                                        <td>@item.Count</td>
+                                        <td>@item.Sum.ToString("#,0")</td>
+                                        <td>#@item.OrderID</td>
+                                        <td>@item.CreateDate.ToShamsi()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot style="background-color: #BFF1DF">
+                                <tr>
+                                    <th colspan="4">جمع</th>
+                                    <th colspan="3">@sum.ToString("#,0")</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="row">
+                            @*<div class="col-xl-4 col-lg-12">
+                                    @if (Model.Item2 > 1)
+                                    {
+                                        <ul class="pagination justify-content-start">
+                                            @for (int i = 1; i <= (int)Model.Item2; i++)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" onclick="changePage(@i)" href="#">@i</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </div>*@
+                            <div class="col-sm-12 col-md-7">
+                                @*Empty*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

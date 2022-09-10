@@ -1,0 +1,113 @@
+﻿@model UniProject.DataLayer.Entity.Order.Order
+@{
+    ViewData["Title"] = "ShowOrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int sumOrder = Model.OrderDetails.Sum(od => od.Price * od.Count);
+}
+
+<div class="container-main">
+    <div class="d-block">
+        <section class="profile-home">
+            <div class="col-lg">
+                <div class="post-item-profile order-1 d-block">
+                    <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                        <div class="sidebar-profile sidebar-navigation">
+                            <partial name="_SideBar" />
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                        <div class="profile-content">
+                            <div class="profile-stats">
+                                <div class="table-favorites">
+                                    <table class="table ns-table table-profile-favorites">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" width="50"> </th>
+                                                <th scope="col">نام محصول</th>
+                                                <th scope="col">قیمت</th>
+                                                <th scope="col">تعداد</th>
+                                                <th scope="col">جمع</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.OrderDetails)
+                                            {
+                                                <tr>
+                                                    <th scope="row">
+                                                        <div class="favorites-product-img">
+                                                            <img src="~/@item.Product.ProductGallery.FirstOrDefault().ImageName">
+                                                            <div class="product-rate">
+                                                                <i class="fa fa-star active"></i>
+                                                                <i class="fa fa-star active"></i>
+                                                                <i class="fa fa-star active"></i>
+                                                                <i class="fa fa-star active"></i>
+                                                                <i class="fa fa-star active"></i>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <td>
+                                                        <a href="/ShowProduct/@item.ProductId">
+                                                            @item.Product.ProductName
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <span class="amount">
+                                                            @item.Price.ToString("#,0")
+                                                            <span>تومان</span>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="number">
+                                                            @item.Count
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="amount">
+                                                            @((item.Count * item.Price).ToString("#,0"))
+                                                            <span>تومان</span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="spacer"></tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            @*<tr>
+                                                <th scope="row">مجموع:</th>
+                                                <td>
+                                                    <span class="amount">
+                                                        <span>تومان</span>
+                                                        40,000
+                                                    </span>
+                                                </td>
+                                            </tr>*@
+                                            <tr>
+                                                <th colspan="4" scope="row">حمل و نقل:</th>
+                                                <td>حمل و نقل رایگان</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4" scope="row">روش پرداخت:</th>
+                                                <td>انتقال مستقیم بانکی</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4" scope="row">قیمت نهایی:</th>
+                                                <td>
+                                                    <span class="amount">
+                                                        <span>تومان</span>
+                                                        @sumOrder
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+

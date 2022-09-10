@@ -1,0 +1,108 @@
+﻿@model UniProject.Core.DTOs.Admin.DeleteUserByAdminViewModel
+@using UniProject.DataLayer.Entity
+@using UniProject.Core.Convertor
+@{
+    ViewData["Title"] = "DeleteUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<Role> Roles = ViewData["Role"] as List<Role>;
+}
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title" id="hidden-label-basic-form">حذف کاربر</h4>
+            </div>
+            <p class="mb-0"></p>
+            <p></p>
+        </div>
+        <div class="card-body">
+            <div class="px-3 ">
+                <form class="form col-12" asp-action="DeleteUser" method="post">
+                    <input type="hidden" asp-for="UserId" />
+                    <div class="form-body">
+                        <h4 class="form-section">
+                            <i class="icon-user"></i> اطلاعات شخصی
+                        </h4>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" asp-for="UserName" class="form-control round" readonly="readonly" placeholder="نام کاربری" />
+                                    <div class="form-control-position">
+                                        <i class="ft-user info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="email" asp-for="Email" class="form-control round" readonly="readonly" placeholder="ایمیل" />
+                                    <div class="form-control-position">
+                                        <i class="ft-mail danger"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="number" asp-for="Wallet" class="form-control round" readonly="readonly" placeholder="موجودی کیف پول" />
+                                    <div class="form-control-position">
+                                        <i class="icon-wallet success"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" asp-for="RegisterDate" value="@Model.RegisterDate.ToShamsi()" class="form-control round" readonly="readonly" placeholder="تاریخ ثبت نام" />
+                                    <div class="form-control-position">
+                                        <i class="fa-times-circle warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="form-section">
+                                <i class="icon-user"></i> نقش کاربر
+                            </h4>
+                            <div class="form-group col-12">
+                                @foreach (var role in Roles)
+                                {
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="SelectedRoles" value="@role.RoleId" disabled @(Model.UserRoles.Any(r => r == role.RoleId) ? "checked" : "") />
+                                        <label style="color:black">@role.RoleTitle</label>
+                                    </div>
+                                }
+                            </div>
+                            <h4 class="form-section">
+                                <i class="icon-user"></i> وضعیت کاربر
+                            </h4>
+                            <div class="form-group col-12 mt-1">
+                                <div class="input-group col-12">
+                                    <div class="custom-control custom-radio display-inline-block col-2">
+                                        <input type="radio" asp-for="IsActive" value="true" disabled id="customRadioInline4" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline4">فعال</label>
+                                    </div>
+                                    <div class="col-1"></div>
+                                    <div class="custom-control custom-radio display-inline-block col-2">
+                                        <input type="radio" asp-for="IsActive" value="false" disabled id="customRadioInline3" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline3">غیرفعال</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions right"
+                        <a class="mr-1 right">
+                            <button type="submit" class="btn btn-danger mr-1">
+                                <i class="icon-trash"></i> حذف کاربر
+                            </button>
+                        </a>
+                        <a href="/Admin/EditUser/@Model.UserId" class="btn btn-info">
+                            <i class="icon-note"></i> ویرایش کاربر
+                        </a>
+                        <a href="/Admin/Users" class="left">بازگشت</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

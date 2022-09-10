@@ -1,0 +1,98 @@
+﻿@model UniProject.Core.DTOs.Admin.ShowProductCategories
+@{
+    ViewData["Title"] = "ShowCategoriesLevel1";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<section id="configuration">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title">لیست دسته بندی محصولات</h4>
+                <div class="card-body collapse show">
+                    <div class="card-block card-dashboard">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <a href="/admin/CreateCategory" class="btn mr-1 btn-primary">افزودن دسته بندی جدید</a>
+                            </div>
+                        </div>
+                        <form asp-action="ShowCategories">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="position-relative has-icon-left">
+                                        <input type="text" class="form-control" name="CategoryTitle" placeholder="نام دسته بندی">
+                                        <div class="form-control-position">
+                                            <i class="ft-search info"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <button class="btn btn-info" type="submit">جستجو</button>
+                                    <a href="/Admin/ProductCategory"><i class="info fa fa-refresh"></i></a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="card-body">
+                            <div class="card-block">
+                                <table class="table table-responsive-md text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>عنوان دسته بندی</th>
+                                            <th>والد</th>
+                                            <th>URL</th>
+                                            <th>اقدامات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var category in Model.ProductCategories)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @category.CategoryTitle
+                                                </td>
+
+                                                <td>
+                                                    @foreach (var sub in Model.ProductCategories.Where(g => g.CategoryId == category.ParentId))
+                                                    {
+                                                        @sub.CategoryTitle
+                                                    }
+                                                </td>
+
+                                                <td>
+                                                    @category.CategoryUrl
+                                                </td>
+
+                                                <td>
+                                                    <a href="/admin/EditCategory/@category.CategoryId" class="success p-0" data-original-title="" title="">
+                                                        <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                                    </a>
+                                                    <a href="/admin/DeleteCategory/@category.CategoryId" class="danger p-0" data-original-title="" title="">
+                                                        <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-12">
+                                <ul class="pagination justify-content-start">
+                                    @for (int i = 1; i <= Model.PageCount; i++)
+                                    {
+                                        <li class="page-item @((i == Model.CurrentPage) ? "active" : "")">
+                                            <a class="page-link" href="/Admin/ProductCategory?CategoryId=@i">@i</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                @*Empty*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

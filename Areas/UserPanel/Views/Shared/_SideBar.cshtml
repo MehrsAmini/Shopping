@@ -1,0 +1,86 @@
+﻿@using UniProject.Core.Convertor
+@using UniProject.Core.DTOs.UserPanel
+@inject UniProject.Core.Services.Interface.IUserService _Service
+@inject UniProject.Core.Services.Interface.IPermissionService _permissionService
+@{
+    SideBarUserProfileViewModel user = _Service.GetUserProfileViewModel(User.Identity.Name);
+}
+<section class="profile-box">
+    <header class="profile-box-header-inline">
+        <div class="profile-avatar user-avatar profile-img">
+            <img src="~/MainTemplate/images/man.png">
+        </div>
+    </header>
+    <footer class="profile-box-content-footer">
+        <span class="profile-box-nameuser">@user.UserName</span>
+        </br>
+        <span class="profile-box-phone">@user.Email</span>
+        <span class="profile-box-registery-date">عضویت: @user.RegisterDate.ToShamsi() </span>
+        <div class="profile-box-tabs">
+            <a href="/Logout" class="profile-box-tab-sign-out">
+                <i class="mdi mdi-logout-variant"></i>خروج از حساب
+            </a>
+        </div>
+    </footer>
+</section>
+<section class="profile-box">
+    <ul class="profile-account-navs">
+        <li class="profile-account-nav-item navigation-link-dashboard">
+            <a href="/UserPanel" class="">
+                <i class="mdi mdi-account-outline"></i>
+                پروفایل
+            </a>
+        </li>
+        <li class="profile-account-nav-item navigation-link-dashboard">
+            <a href="/UserPanel/ShowOrders" class="">
+                <i class="mdi mdi-cart"></i>
+                همه سفارش ها
+            </a>
+        </li>
+        @*<li class="profile-account-nav-item navigation-link-dashboard">
+                <a href="#" class="">
+                    <i class="mdi mdi-heart"></i>
+                    لیست علاقه مندی
+                </a>
+            </li>*@
+        <li class="profile-account-nav-item navigation-link-dashboard">
+            <a href="/UserPanel/ShowAddress" class="">
+                <i class="mdi mdi-map-outline"></i>
+                آدرس ها
+            </a>
+        </li>
+        @*<li class="profile-account-nav-item navigation-link-dashboard">
+                <a href="#" class="">
+                    <i class="mdi mdi-email-open-outline"></i>
+                    نظرات
+                </a>
+            </li>*@
+        @if (_permissionService.CheckPermission(1, User.Identity.Name))
+        {
+            <li class="profile-account-nav-item navigation-link-dashboard">
+                <a href="/admin" class="">
+                    <i class="mdi mdi-account-outline"></i>
+                    پنل مدیریت
+                </a>
+            </li>
+        }
+        <li class="profile-account-nav-item navigation-link-dashboard">
+            <a href="/UserPanel/EditProfile">
+                <i class="mdi mdi-account-edit-outline"></i>
+                تغییر اطلاعات حساب
+            </a>
+        </li>
+        <li class="profile-account-nav-item navigation-link-dashboard">
+            <a href="/UserPanel/ChangePassword">
+                <i class="mdi mdi-key-outline"></i>
+                تغییر رمز عبور
+            </a>
+        </li>
+        <li class="profile-account-nav-item navigation-link-dashboard">
+            <a href="/UserPanel/Wallet">
+                <i class="mdi mdi-wallet-outline"></i>
+                شارژ کیف پول
+            </a>
+        </li>
+    </ul>
+</section>

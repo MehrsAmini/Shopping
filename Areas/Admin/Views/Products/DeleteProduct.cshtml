@@ -1,0 +1,177 @@
+﻿@using UniProject.Core.DTOs.Admin.Product.Delete
+@model ProductInfoViewModel
+@{
+    ViewData["Title"] = "DeleteProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    List<ShowFeaturesViewModel> features = ViewData["Features"] as List<ShowFeaturesViewModel>;
+    List<ShowImagesViewModel> images = ViewData["Images"] as List<ShowImagesViewModel>;
+}
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title" id="hidden-label-basic-form">حذف محصول</h4>
+            </div>
+            <p class="mb-0"></p><p class="textalign"></p>
+        </div>
+        <div class="card-body">
+            <div class="px-3">
+                <form class="form form-horizontal" asp-action="DeleteProduct" method="post">
+                    <div class="form-body">
+                        <input type="hidden" asp-for="ProductId" />
+                        <!--اطلاعات محصول-->
+                        <h4 class="form-section">
+                            <i class="icon-user"></i> اطلاعات محصول
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">عنوان محصول :</label>
+                                    <div class="col-md-9">
+                                        <input type="text" asp-for="ProductName" class="form-control border-primary" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">توضیح مختصر:</label>
+                                    <div class="col-md-9">
+                                        <input type="text" asp-for="ShortDescription" class="form-control border-primary" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">توضیحات : </label>
+                                    <div class="col-md-9">
+                                        <textarea rows="6" asp-for="Description" class="form-control col-md-9 border-primary" readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5">
+                                @*<div>
+                    <p>تصویر اصلی محصول</p>
+                    <img src="~/MainTemplate/images/man.png" />
+                    <div class="form-group">
+                        <label>انتخاب تصویر</label>
+                        <input type="file" id="ImageName" name="mainImage" class="form-control-file">
+                    </div>
+                </div>*@
+                                <div>
+                                    <label>وضعیت نمایش در سایت:</label>
+                                    <br />
+                                    <div class="custom-control custom-radio display-inline-block col-2">
+                                        <input type="radio" asp-for="IsActive" value="true" class="custom-control-input" readonly>
+                                        <label class="custom-control-label" for="customRadioInline4">فعال</label>
+                                    </div>
+                                    <div class="col-1"></div>
+                                    <div class="custom-control custom-radio display-inline-block col-2">
+                                        <input type="radio" asp-for="IsActive" value="false" class="custom-control-input" readonly>
+                                        <label class="custom-control-label" for="customRadioInline3">غیرفعال</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--اطلاعات دسته بندی محصول-->
+                        <h4 class="form-section">
+                            <i class="icon-user"></i> اطلاعات دسته بندی محصول
+                        </h4>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-6 col-md-12">
+                                <fieldset class="form-group">
+                                    <label>سطح اول</label>
+                                    <input type="text" asp-for="CategoryTitleLevel1" class="form-control round" readonly>
+                                </fieldset>
+                            </div>
+                            <div class="col-xl-4 col-lg-6 col-md-12">
+                                <fieldset class="form-group">
+                                    <label>سطح دوم</label>
+                                    <input type="text" asp-for="CategoryTitleLevel2" class="form-control round" readonly>
+                                </fieldset>
+                            </div>
+                            <div class="col-xl-4 col-lg-6 col-md-12">
+                                <fieldset class="form-group">
+                                    <label>سطح سوم</label>
+                                    <input type="text" asp-for="CategoryTitleLevel3" class="form-control round" readonly>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <!--اطلاعات فروشنده محصول-->
+                        <h4 class="form-section">
+                            <i class="icon-user"></i> اطلاعات فروشنده
+                        </h4>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-6 col-md-12">
+                                <fieldset class="form-group">
+                                    <label>نام فروشنده</label>
+                                    <input type="text" asp-for="SellerName" class="form-control round" readonly>
+                                </fieldset>
+                            </div>
+                            <div class="col-xl-4 col-lg-6 col-md-12">
+                                <fieldset class="form-group">
+                                    <label>قیمت به نومان</label>
+                                    <input type="number" asp-for="Price" class="form-control border-primary" readonly>
+                                </fieldset>
+                            </div>
+                            <div class="col-xl-4 col-lg-6 col-md-12">
+                                <fieldset class="form-group">
+                                    <label>موجودی محصول</label>
+                                    <input type="number" asp-for="Inventory" class="form-control border-primary" readonly>
+                                    <span asp-validation-for="Inventory" class="text-danger"></span>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <!--ویژگی های محصول-->
+                        <h4 class="form-section">
+                            <i class="icon-user"></i>ویژگی های محصول
+                        </h4>
+                        <div class="card-block">
+                            <table class="table table-striped" id="tbl_Features">
+                                <thead>
+                                    <tr>
+                                        <th>نام ویژگی</th>
+                                        <th>مقدار ویژگی</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in features)
+                                    {
+                                        <tr>
+                                            <td>@item.FeatuerTitle</td>
+                                            <td>@item.FeatureValue</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!--گالری تصاویر محصول-->
+                        <h4 class="form-section">
+                            <i class="icon-user"></i>گالری تصاویر
+                        </h4>
+                        <div class="col-12 col-sm-12">
+                            <figure class="col-xl-6 col-lg-4 col-sm-6 col-12">
+                                @foreach (var item in images)
+                                {
+                                    <a target="_blank" href="~/@item.ImageName">
+                                        <img width="200" height="200" class="img-thumbnail img-fluid" src="~/@item.ImageName">
+                                    </a>
+                                }
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <a href="/Admin/ShowProducts" class="btn mr-1 btn-danger">
+                            <i class="ft-x"></i> لغو
+                        </a>
+                        <button type="submit" id="btnAddProduct" class="btn btn-success">
+                            <i class="icon-check"></i> حذف
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

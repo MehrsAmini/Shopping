@@ -1,0 +1,120 @@
+﻿@model UniProject.Core.DTOs.Admin.EditUsersByAdminViewModel
+@using UniProject.DataLayer.Entity
+@{
+    ViewData["Title"] = "EditUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    List<Role> Roles = ViewData["Role"] as List<Role>;
+}
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title" id="hidden-label-basic-form">ویرایش اطلاعات کاربر</h4>
+            </div>
+            <p class="mb-0"></p>
+            <p class="textalign">
+                برای ویرایش اطلاعات کاربر کافیست هر قسمت را ویرایش کنید
+            </p>
+            <p></p>
+        </div>
+        <div class="card-body">
+            <div class="px-3 ">
+                <form id="userForm" class="form col-12" asp-action="EditUser" onsubmit="onFormSubmit(); return false;" method="post">
+                    <div class="form-body">
+                        <h4 class="form-section">
+                            <i class="icon-user"></i> اطلاعات شخصی
+                        </h4>
+                        <div class="col-12">
+                            <input asp-for="UserId" type="hidden" />
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" asp-for="UserName" class="form-control round" readonly="readonly" placeholder="نام کاربری" />
+                                    <div class="form-control-position">
+                                        <i class="ft-user info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="email" asp-for="Email" class="form-control round" placeholder="ایمیل" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                    <div class="form-control-position">
+                                        <i class="ft-mail danger"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" asp-for="Password" class="form-control round" placeholder="رمز عبور" />
+                                    <div class="form-control-position">
+                                        <i class="ft-lock warning"></i>
+                                    </div>
+                                </div>
+                                <p class="help-block">
+                                    در صورت وارد کردن کلمه عبور، کلمه عبور کاربر تغییر خواهد کرد.
+                                </p>
+                            </div>
+                            <h4 class="form-section">
+                                <i class="icon-user"></i> نقش کاربر
+                            </h4>
+                            <div class="form-group col-12">
+                                @foreach (var role in Roles)
+                                {
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="SelectedRoles" value="@role.RoleId" @(Model.UserRoles.Any(r => r == role.RoleId) ? "checked" : "") />
+                                        <label style="color:black">@role.RoleTitle</label>
+                                    </div>
+                                }
+                                <span id="roles" class="text-danger"></span>
+                            </div>
+                            <h4 class="form-section">
+                                <i class="icon-user"></i> وضعیت کاربر
+                            </h4>
+                            <div class="form-group col-12 mt-1">
+                                <div class="input-group col-12">
+                                    <div class="custom-control custom-radio display-inline-block col-2">
+                                        <input type="radio" asp-for="IsActive" value="true" id="customRadioInline4" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline4">فعال</label>
+                                    </div>
+                                    <div class="col-1"></div>
+                                    <div class="custom-control custom-radio display-inline-block col-2">
+                                        <input type="radio" asp-for="IsActive" value="false" id="customRadioInline3" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadioInline3">غیرفعال</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="form-group">
+                            <a class="mr-1">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="icon-check"></i> ذخیره
+                                </button>
+                            </a>
+                            <a href="/Admin/DeleteUser/@Model.UserId" class="btn mr-1 btn-danger">
+                                <i class="icon-trash"></i> حذف کاربر
+                            </a>
+                            <a href="/Admin/Users" class="mr-5">بازگشت</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function onFormSubmit() {
+        var anyRole = $('input[name="SelectedRoles"]').toArray().some(function (x) { return x.checked; });
+        if (anyRole) {
+            $('#userForm').submit();
+            return true;
+        }
+        document.getElementById("roles").innerHTML = 'لطفا یک نقش برای کاربر انتخاب کنید';
+        return false;
+    };
+</script>

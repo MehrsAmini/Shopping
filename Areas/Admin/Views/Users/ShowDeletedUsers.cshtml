@@ -1,0 +1,125 @@
+﻿@model UniProject.Core.DTOs.Admin.ShowUsersForAdminViewModel
+@using UniProject.Core.Convertor
+@{
+    ViewData["Title"] = "ShowDeletedUsers";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section id="configuration">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-title-wrap bar-success">
+                <h4 class="card-title">لیست کاربران</h4>
+                <div class="card-body collapse show">
+                    <div class="card-block card-dashboard">
+                        <form asp-action="ShowUsers">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="position-relative has-icon-left">
+                                        <input type="text" class="form-control" name="Username" placeholder="نام کاربری">
+                                        <div class="form-control-position">
+                                            <i class="ft-search info"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="position-relative has-icon-left">
+                                        <input type="text" class="form-control" name="Email" placeholder="ایمیل">
+                                        <div class="form-control-position">
+                                            <i class="ft-search info"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2">
+                                    <button class="btn btn-info" type="submit">جستجو</button>
+                                    <a href="/Admin/users"><i class="info fa fa-refresh"></i></a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <table class="table table-responsive-md text-center table-striped table-bordered zero-configuration dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th>#</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="نام کاربری: activate to sort column descending" style="width: 100px;">نام کاربری</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="ایمیل: activate to sort column ascending" style="width: 231px;">ایمیل</th>
+                                                    <th>وضعیت</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="تاریخ ثبت نام: activate to sort column ascending" style="width: 100px;">تاریخ ثبت نام</th>
+                                                    @*<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="موجودی کیف پول: activate to sort column ascending" style="width: 155px;">موجودی کیف پول</th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var user in Model.Users)
+                                                {
+                                                    <tr role="row" class="odd">
+                                                        <td>
+                                                            <ol>
+                                                                <li></li>
+                                                            </ol>
+                                                        </td>>
+                                                        <td class="sorting_1">@user.UserName</td>
+                                                        <td class="sorting">@user.Email</td>
+                                                        <td>
+                                                            @if (user.IsActive)
+                                                            {
+                                                                <i class="success p-0 fa fa-check font-medium-3 mr-2"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="danger p-0 fa fa-times font-medium-3 mr-2"></i>
+                                                            }
+                                                        </td>
+                                                        <td>@user.RegisterDate.ToShamsi()</td>
+                                                        @*<td>@user.Wallets تومان</td>*@
+                                                        @*<td>
+                                                            <a href="/admin/edituser/@user.UserId" class="success p-0" data-original-title="" title="">
+                                                                <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                                            </a>
+                                                            <a class="danger p-0" data-original-title="" title="">
+                                                                <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                                            </a>
+                                                        </td>*@
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th rowspan="1" colspan="1">نام کاربری</th>
+                                                    <th rowspan="1" colspan="1">ایمیل</th>
+                                                    <th rowspan="1" colspan="1">وضعیت</th>
+                                                    <th rowspan="1" colspan="1">تاریخ ثبت نام</th>
+                                                    @*<th rowspan="1" colspan="1">موجودی کیف پول</th>*@
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-12">
+                                        <ul class="pagination justify-content-start">
+                                            @for (int i = 1; i <= Model.PageCount; i++)
+                                            {
+                                                <li class="page-item @((i == Model.CurrentPage) ? "active" : "")">
+                                                    <a class="page-link" href="/Admin/Users?PageId=@i">@i</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        @*Empty*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

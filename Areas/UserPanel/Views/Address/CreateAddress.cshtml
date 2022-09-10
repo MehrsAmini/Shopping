@@ -1,0 +1,66 @@
+﻿@model UniProject.Core.DTOs.UserPanel.AddressViewModel
+@{
+    ViewData["Title"] = "CreateAddress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-main">
+    <div class="d-block">
+        <section class="profile-home">
+            <div class="col-lg">
+                <div class="post-item-profile order-1 d-block">
+                    <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                        <div class="sidebar-profile sidebar-navigation">
+                            <partial name="_SideBar" />
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                        <div class="profile-content">
+                            <div class="profile-stats">
+                                <div class="profile-address">
+                                    <div class="middle-container">
+                                        <form asp-action="CreateAddress" method="post" class="form-checkout">
+                                            <div class="form-checkout-row">
+                                                <label for="name">نام تحویل گیرنده </label>
+                                                <input type="text" asp-for="FullName" class="input-name-checkout form-control">
+                                                <span asp-validation-for="FullName" class="text-danger"></span>
+
+                                                <label for="phone-number">شماره موبایل</label>
+                                                <input type="text" asp-for="MobileNumber" class="input-name-checkout form-control">
+                                                <span asp-validation-for="MobileNumber" class="text-danger"></span>
+
+                                                <label for="name">استان </label>
+                                                <input type="text" asp-for="Province" class="input-name-checkout form-control">
+                                                <span asp-validation-for="Province" class="text-danger"></span>
+
+                                                <label for="phone-number">شهر</label>
+                                                <input type="text" asp-for="City" class="input-name-checkout form-control">
+                                                <span asp-validation-for="City" class="text-danger"></span>
+
+                                                <label for="post-code">کد پستی</label>
+                                                <input type="text" asp-for="PostCode" class="input-name-checkout form-control" placeholder="کد پستی را بدون خط تیره بنویسید">
+                                                <span asp-validation-for="PostCode" class="text-danger"></span>
+
+                                                <label for="address">
+                                                    آدرس
+                                                </label>
+                                                <textarea rows="5" asp-for="AddressDetails" cols="30" class="textarea-name-checkout form-control"></textarea>
+                                                <span asp-validation-for="AddressDetails" class="text-danger"></span>
+
+                                                <div class="AR-CR">
+                                                    <button type="submit" class="btn-registrar"> ثبت آدرس</button>
+                                                    <a href="/UserPanel/ShowAddress" class="cancel-edit-address" data-dismiss="modal" aria-label="Close">بازگشت</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+

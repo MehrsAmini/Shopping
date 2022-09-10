@@ -1,0 +1,96 @@
+﻿@model UniProject.Core.DTOs.UserPanel.ChargeWalletViewModel
+@using UniProject.Core.DTOs.UserPanel
+@using UniProject.Core.Convertor
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-main">
+    <div class="d-block">
+        <section class="profile-home">
+            <div class="col-lg">
+                <div class="post-item-profile order-1 d-block">
+                    <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                        <div class="sidebar-profile sidebar-navigation">
+                            <partial name="_SideBar" />
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                        <div class="profile-content">
+                            <div class="profile-stats">
+                                <form asp-action="Index" method="post" class="form-checkout">
+                                    <div class="form-checkout-row">
+                                        <table class="table table-profile">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="w-50">
+                                                        <div>
+                                                            <label for="namefirst">مبلغ به ریال <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                                            <input asp-for="Price" type="number" placeholder="مبلغ به ریال" class="input-namefirst-checkout form-control" />
+                                                            <span asp-validation-for="Price" class="text-danger"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="AR-CR">
+                                            <button class="btn btn-registrar"> شارژ کیف پول </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="profile-edit-action"></div>
+                                @******************************************************************************@
+                                @{
+                                    List<WalletViewModel> list = ViewBag.ListWallet as List<WalletViewModel>;
+                                }
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                <div class="title">مبلغ</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">تاریخ</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">نوع تراکنش</div>
+                                            </th>
+                                            <th>
+                                                <div class="title">شرح</div>
+                                            </th>
+                                        </tr>
+                                        @foreach (var item in list)
+                                        {
+                                            <tr>
+                                                <td><div class="value">@item.Amount.ToString("#,0 ریال")</div></td>
+                                                <td><div class="value">@item.CreateTime.ToShamsi()</div></td>
+
+                                                <td>
+                                                    @if (item.Type == 1)
+                                                    {
+                                                        <p class="value text-success">واریز به حساب</p>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="value text-danger">برداشت از حساب</p>
+                                                    }
+                                                </td>
+
+                                                <td><p class="value">@item.Description</p></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+

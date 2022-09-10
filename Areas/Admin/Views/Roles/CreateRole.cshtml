@@ -1,0 +1,94 @@
+﻿@model UniProject.DataLayer.Entity.Role
+@using UniProject.DataLayer.Entity.Permission
+@{
+    ViewData["Title"] = "CreateRole";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    List<Permission> permissions = ViewData["Permissions"] as List<Permission>;
+
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title-wrap bar-success">
+            <h4 class="card-title" id="horz-layout-colored-controls">افزودن نقش جدید</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="px-3">
+            <form class="form form-horizontal" asp-action="CreateRole" method="post">
+                <div class="form-body">
+                    <h4 class="form-section">
+                        <i class="icon-direction"></i> نقش
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput1">عنوان نقش :</label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="RoleTitle" id="userinput1" class="form-control round">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="form-section">
+                        <i class="ft-mail"></i>دسترسی ها
+                    </h4>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <ul style="list-style-type:none">
+                                        @foreach (var permission in permissions.Where(p => p.ParentId == null))
+                                        {
+                                            <li>
+                                                <input type="checkbox" name="SelectedPermissions" value="@permission.PermissionId">
+                                                <label style="color:black">@permission.PermissionTitle</label>
+                                                @if (permissions.Any(p => p.ParentId == permission.ParentId))
+                                                {
+                                                    <ul style="list-style-type:none">
+                                                        @foreach (var sub in permissions.Where(p => p.ParentId == permission.PermissionId))
+                                                        {
+                                                            <li>
+                                                                <input type="checkbox" name="SelectedPermissions" value="@sub.PermissionId">
+                                                                <label style="color:black">@sub.PermissionTitle</label>
+                                                                @if (permissions.Any(p => p.ParentId == sub.ParentId))
+                                                                {
+                                                                    <ul style="list-style-type:none">
+
+                                                                        @foreach (var sub2 in permissions.Where(p => p.ParentId == sub.PermissionId))
+                                                                        {
+                                                                            <li>
+                                                                                <input type="checkbox" name="SelectedPermissions" value="@sub2.PermissionId">
+                                                                                <label style="color:black">@sub2.PermissionTitle</label>
+                                                                            </li>
+                                                                        }
+                                                                    </ul>
+                                                                }
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                }
+                                            </li>
+                                        }
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions left">
+                    <a href="/admin/roles" class="btn btn-danger mr-1">
+                        <i class="ft-x"></i> لغو
+                    </a>
+                    <a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-check"></i> ذخیره
+                        </button>
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

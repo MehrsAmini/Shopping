@@ -1,0 +1,222 @@
+﻿@model UniProject.DataLayer.Entity.Order.Order
+
+@using UniProject.Core.Services.Interface
+@inject IUserService _userService
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var address = _userService.GetAllAdresses(User.Identity.Name).FirstOrDefault();
+
+}
+
+<div class="container-main">
+    <div class="d-block">
+        <section class="blog-checkout d-block order-1">
+            <div class="col-lg">
+                <div class="checkout woocommerce-checkout">
+                    <div class="content-checkout container">
+                        <div class="middle-container">
+                            <form action="#" class="form-checkout">
+                                <div class="col2-set" id="customer-details">
+                                    <div class="col-12">
+                                        <div class="billing-fields mt-4">
+                                            <h4>جزئیات صورتحساب</h4>
+                                            @if (address != null)
+                                            {
+                                                <div class="form-checkout-row">
+                                                    <div class="validate-required">
+                                                        <label>نام تحویل گیرنده</label>
+                                                        <input type="text" class="input-name-checkout form-control" value="@address.FullName" disabled>
+                                                    </div>
+
+                                                    <div class="validate-required">
+                                                        <label for="phone-number">شماره تماس</label>
+                                                        <input type="text" class="input-name-checkout form-control" value="@address.MobileNumber" disabled>
+                                                    </div>
+                                                    <div class="validate-required">
+                                                        <label>استان</label>
+                                                        <input type="text" class="input-name-checkout form-control" value="@address.Province" disabled>
+                                                    </div>
+
+                                                    <div class="validate-required">
+                                                        <label>شهر</label>
+                                                        <input type="text" class="input-name-checkout form-control" value="@address.City" disabled>
+                                                    </div>
+                                                    <div class="validate-required">
+                                                        <label>کد پستی</label>
+                                                        <input type="text" class="input-name-checkout form-control" value="@address.PostCode" disabled>
+                                                    </div>
+
+                                                    <div class="validate-required">
+                                                        <label>آدرس</label>
+                                                        <input type="text" class="input-name-checkout form-control" value="@address.AddressDetails" disabled>
+                                                    </div>
+                                                </div>
+                                                <span class="text-danger">
+                                                    *در صورت مغایرت آدرس از این
+                                                    <a href="/UserPanel/ShowAddress">لینک</a>
+                                                    آن را اصلاح کنید
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-checkout-row">
+                                                    <div class="validate-required">
+                                                        <label>نام تحویل گیرنده</label>
+                                                        <input type="text" class="input-name-checkout form-control" disabled>
+                                                    </div>
+
+                                                    <div class="validate-required">
+                                                        <label for="phone-number">شماره تماس</label>
+                                                        <input type="text" class="input-name-checkout form-control" disabled>
+                                                    </div>
+                                                    <div class="validate-required">
+                                                        <label>استان</label>
+                                                        <input type="text" class="input-name-checkout form-control" disabled>
+                                                    </div>
+
+                                                    <div class="validate-required">
+                                                        <label>شهر</label>
+                                                        <input type="text" class="input-name-checkout form-control" disabled>
+                                                    </div>
+                                                    <div class="validate-required">
+                                                        <label>کد پستی</label>
+                                                        <input type="text" class="input-name-checkout form-control" disabled>
+                                                    </div>
+
+                                                    <div class="validate-required">
+                                                        <label>آدرس</label>
+                                                        <input type="text" class="input-name-checkout form-control" disabled>
+                                                    </div>
+                                                </div>
+                                                <span class="text-danger">
+                                                    *آدرس خود را از این
+                                                    <a href="/UserPanel/ShowAddress">لینک</a>
+                                                    وارد کنید
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <h3 class="order-review-heading">سفارش شما</h3>
+                            <div class="checkout-review-order">
+                                <table class="checkout-review-order-table table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="product-name">محصول</th>
+                                            <th scope="col" class="product-price">قیمت کل</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.OrderDetails)
+                                        {
+                                            <tr class="checkout-cart-item">
+                                                <td class="product-name">
+                                                    @item.Product.ProductName
+                                                    <p>(@item.Count عدد)</p>
+                                                </td>
+                                                <td class="product-price text-info">
+                                                    <span class="amount">
+                                                        @((item.Count * item.Price).ToString("#,0"))
+                                                        <span>تومان</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="order-total">
+                                            <th>حمل ونقل</th>
+                                            <td>
+                                                <div class="shipping-totals-item">
+                                                    <span class="shipping-destination">
+                                                        رایگان
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="cart-subtotal">
+                                            <th>مجموع</th>
+                                            <td>
+                                                <span class="amount">
+                                                    @Model.OrderSum.ToString("#,0")
+                                                    <span>تومان</span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <ul class="checkout-payment-methods">
+                                    <li class="checkout-payment-method-item d-block">
+                                        <label for="#" class="outline-radio">
+                                            <input type="radio" name="payment_method" id="payment-option-online" checked="">
+                                            <span class="outline-radio-check"></span>
+                                        </label>
+                                        <label for="#" class="shipping-totals-title-row">
+                                            <div class="shipping-totals-title">
+                                                پرداخت از کیف پول
+                                            </div>
+                                        </label>
+                                    </li>
+                                </ul>
+                                @if (address != null)
+                                {
+                                    @if (_userService.RemainderWallet(User.Identity.Name) >= Model.OrderSum)
+                                    {
+                                        <div class="proceed-to-checkout">
+                                            <a href="/USerPanel/Orders/FinalyOrder/@Model.OrderId" class="btn-Order btn btn-primary mt-4 mb-3">
+                                                ثبت
+                                                سفارش
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="proceed-to-checkout">
+                                            <a href="#" class="btn-Order btn btn-primary mt-4 mb-3" disabled>
+                                                ثبت
+                                                سفارش
+                                            </a>
+
+                                        </div>
+                                        <div>
+                                            <p class="text-danger">
+                                                موجودی کیف پول شما کافی نمی باشد ، لطفا از طریق این
+                                                <a href="/UserPanel/Wallet" class="alert-link">لینک</a>
+                                                اقدام به شارژ حساب کنید
+                                            </p>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="proceed-to-checkout">
+                                        <a href="#" class="btn-Order btn btn-primary mt-4 mb-3" disabled>
+                                            ثبت
+                                            سفارش
+                                        </a>
+
+                                    </div>
+                                    <div>
+                                        <p class="text-danger">
+                                            برای ثبت سفارش ابتدا از این
+                                            <a href="/UserPanel/ShowAddress" class="alert-link">لینک</a>
+                                            آدرس خود را وارد کنید
+                                        </p>
+                                    </div>
+                                }
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

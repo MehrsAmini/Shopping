@@ -1,0 +1,76 @@
+﻿@model List<UniProject.DataLayer.Entity.Order.Order>
+@using UniProject.Core.Convertor
+@{
+    ViewData["Title"] = "ShowOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-main">
+    <div class="d-block">
+        <section class="profile-home">
+            <div class="col-lg">
+                <div class="post-item-profile order-1 d-block">
+                    <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                        <div class="sidebar-profile sidebar-navigation">
+                            <partial name="_SideBar" />
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                        <div class="profile-content">
+                            <div class="profile-stats">
+                                <div class="table-orders">
+                                    <table class="table table-profile-orders">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">شماره سفارش</th>
+                                                <th scope="col">تاریخ ثبت سفارش</th>
+                                                <th scope="col">مجموع</th>
+                                                <th scope="col">وضعیت</th>
+                                                <th scope="col">جزئیات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td class="order-code">#@item.OrderId</td>
+                                                    <td>@item.CreateDate.ToShamsi()</td>
+                                                    <td class="totla">
+                                                        <span class="amount">
+                                                            @item.OrderSum.ToString("#,0")
+                                                            <span>تومان</span>
+                                                        </span>
+                                                    </td>
+                                                    @if (item.IsFinaly)
+                                                    {
+                                                        <td class="text-success">پرداخت شده</td>
+                                                        <td class="detail">
+                                                            <a href="/UserPanel/ShowOrderDetails/@item.OrderId" class="btn btn-secondary d-block">
+                                                                نمایش
+                                                            </a>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="text-danger">پرداخت نشده</td>
+                                                        <td class="detail">
+                                                            <a href="/UserPanel/ShowCart/@item.OrderId" class="btn btn-secondary d-block">
+                                                                نمایش
+                                                            </a>
+                                                        </td>
+                                                    }
+                                                </tr>
+                                                <tr class="spacer"></tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+

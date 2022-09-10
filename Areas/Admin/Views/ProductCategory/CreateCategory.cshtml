@@ -1,0 +1,128 @@
+﻿@model UniProject.DataLayer.Entity.Product.ProductCategory
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title-wrap bar-success">
+            <h4 class="card-title" id="horz-layout-colored-controls">افزودن دسته بندی محصولات جدید</h4>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="px-3">
+            <form id="categoryForm" class="form form-horizontal" asp-action="CreateCategory" method="post">
+                <div class="form-body">
+                    <h4 class="form-section">
+                        <i class="icon-direction"></i> دسته بندی محصول
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput1">عنوان :</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="CategoryTitle" asp-for="CategoryTitle" class="form-control round">
+                                    <span asp-validation-for="CategoryTitle" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="userinput2">URL:</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="CategoryUrl" asp-for="CategoryUrl" class="form-control round">
+                                    <span asp-validation-for="CategoryUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="form-section">
+                        <i class="ft-mail"></i>پدر دسته بندی محصول
+                    </h4>
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <fieldset class="form-group">
+                                <label>اصلی</label>
+                                <select class="form-control" id="CategoryLevel1" name="ParentId" asp-items="@(ViewData["Category"] as SelectList)">
+                                    <option disabled selected value="">انتخاب کنید</option>
+                                </select>
+                                <span class="text-danger"></span>
+                            </fieldset>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <fieldset class="form-group">
+                                <label>فرعی</label>
+                                <select id="CategoryLevel2" name="ParentId" class="form-control">
+                                    <option disabled selected value="">انتخاب کنید</option>
+                                </select>
+                                <span class="text-danger"></span>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions right">
+                    <a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-check"></i> ذخیره
+                        </button>
+                    </a>
+                    <a href="/admin/ProductCategory" class="btn btn-danger mr-1">
+                        <i class="ft-x"></i> لغو
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts
+{
+    <script>
+
+        $("#CategoryLevel1").change(function () {
+            $("#CategoryLevel2").empty();
+            $.getJSON("/admin/products/GetCategoryLevel2/" + $("#CategoryLevel1 :selected").val(),
+                function (data) {
+                    $("#CategoryLevel1").attr('name', 'ParentId');
+                    $("#CategoryLevel2").attr('name', 'x');
+                    $.each(data,
+                        function () {
+                            $("#CategoryLevel2").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                });
+        });
+        $("#CategoryLevel2").change(function () {
+            if ($("#CategoryLevel2").val()) {
+                $("#CategoryLevel1").attr('name', 'x');
+                $("#CategoryLevel2").attr('name', 'ParentId');
+            }
+            else {
+                $("#CategoryLevel1").attr('name', 'ParentId');
+                $("#CategoryLevel2").attr('name', 'x');
+            }
+        });
+
+        //var titleinput = doc.getElementById("CategoryTitle").value;
+        //var urlinput = doc.getElementById("CategoryUrl").value;
+        //function onFormSubmit() {
+        //    if (titleinput != null && urlinput != null) {
+        //        $('#categoryForm').submit();
+        //        return true;
+        //    }
+        //    else if (titleinput == null || urlinput == null) {
+        //        document.getElementById("Title").innerHTML = 'لطفا عنوان دسته بندی را وارد کنید ';
+        //        return false;
+        //    }
+
+        //};
+
+    </script>
+}
