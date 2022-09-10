@@ -1,0 +1,30 @@
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.deps.json
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.runtimeconfig.json
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.runtimeconfig.dev.json
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\bin\Debug\net5.0\ref\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.pdb
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.AssemblyInfoInputs.cache
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.AssemblyInfo.cs
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.csproj.CoreCompileInputs.cache
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\ref\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.pdb
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.genruntimeconfig.cache
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.deps.json
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.runtimeconfig.json
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.runtimeconfig.dev.json
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\bin\Debug\net5.0\ref\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\bin\Debug\net5.0\UniProject.DataLayer.pdb
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.csproj.AssemblyReference.cache
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.AssemblyInfoInputs.cache
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.AssemblyInfo.cs
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.csproj.CoreCompileInputs.cache
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\ref\UniProject.DataLayer.dll
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.pdb
+E:\mehrsa\Project-Store\New folder\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.genruntimeconfig.cache
+E:\mehrsa\Project-Store\UniProject\UniProject.DataLayer\obj\Debug\net5.0\UniProject.DataLayer.csproj.AssemblyReference.cache
